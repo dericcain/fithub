@@ -6,11 +6,22 @@ const Container = styled.View`
   padding: 24px;
 `;
 
+const Heading = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
 export const Schedule = () => {
   return (
     <Container>
-      <Icon name="schedule" type="material" />
-      <Text h4>Schedule</Text>
+      <Heading>
+        <Icon
+          containerStyle={{ marginRight: 8 }}
+          name="schedule"
+          type="material"
+        />
+        <Text h4>Schedule</Text>
+      </Heading>
     </Container>
   );
 };

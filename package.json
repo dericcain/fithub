@@ -34,6 +34,7 @@
     "eslint": "^6.6.0",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.57.0",
+    "react-native-dotenv": "^0.2.0",
     "react-test-renderer": "16.9.0",
     "reactotron-react-native": "^4.0.2"
   },

@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { view } from 'react-easy-state';
 import styled from 'styled-components/native';
 import { firebase } from '@react-native-firebase/auth';
-import { GoogleSignin } from '@react-native-community/google-signin';
 
 import { User } from '../../stores/user';
 
@@ -16,22 +15,8 @@ const Container = styled.View`
   width: 100%;
 `;
 
-async function checkAuth() {
-  const isSignedIn = await GoogleSignin.isSignedIn();
-  if (isSignedIn) {
-    console.debug('user is signed in');
-    const userInfo = await GoogleSignin.getCurrentUser();
-    const credential = firebase.auth.GoogleAuthProvider.credential(
-      userInfo.idToken,
-      userInfo.accessToken,
-    );
-    await firebase.auth().signInWithCredential(credential);
-  }
-}
-
 export const AuthLoading = view(({ navigation }) => {
   const [initializing, setInitializing] = useState(true);
-  const isMounted = useRef(false);
 
   const onAuthStateChanged = user => {
     if (user) {
@@ -45,10 +30,9 @@ export const AuthLoading = view(({ navigation }) => {
   };
 
   useEffect(() => {
-    checkAuth();
+    // (async () => await checkAuth())();
     const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
     return () => {
-      isMounted.current = false;
       subscriber();
     };
   }, []);

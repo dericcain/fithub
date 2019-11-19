@@ -1,5 +1,6 @@
 import { useReducer, useRef, useEffect } from 'react';
 
+// This is a safe set state which makes sure the component is mounted before making an update.
 export const useSetState = () => {
   const [state, setState] = useReducer(
     (oldState, newState) => ({ ...oldState, ...newState }),
