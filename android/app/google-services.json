@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "313017879174",
+    "firebase_url": "https://lab-days.firebaseio.com",
+    "project_id": "lab-days",
+    "storage_bucket": "lab-days.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313017879174:android:7ca544e0247a59dd891f07",
+        "android_client_info": {
+          "package_name": "com.labdays"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "313017879174-c59296h7qtlfjhq0dcq5csk5d1a55hib.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcweJskrCEPZFvfENodOm9zwhv-_ihmE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "313017879174-c59296h7qtlfjhq0dcq5csk5d1a55hib.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "313017879174-9e8ta8f6hid75266b9svv38hb1qhv2bs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.labdays.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
