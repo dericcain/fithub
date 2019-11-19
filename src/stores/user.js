@@ -1,5 +1,6 @@
 import { store } from 'react-easy-state';
 
+// Maybe we need to move more logic here regarding the user, i.e., login and such
 export const User = store({
   uid: '',
   displayName: '',

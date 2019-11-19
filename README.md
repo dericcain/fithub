@@ -6,6 +6,14 @@
 3. [Make sure you have Yarn installed](https://yarnpkg.com/en/docs/install#mac-stable) and then install dependencies: `yarn install`
 4. Run the simulators: `yarn ios` or `yarn android` 
 
+## Technology
+- React Native - https://facebook.github.io/react-native/docs/getting-started
+- React Navigation - https://reactnavigation.org/en/
+- React Native Elements - https://react-native-elements.github.io/react-native-elements/
+- Styled Components - https://www.styled-components.com/docs/basics#react-native
+- Firebase/React Native Firebase - https://invertase.io/oss/react-native-firebase/
+- react-easy-state - https://github.com/solkimicreb/react-easy-state
+
 ## Folder Structure
 Most everything will be located in the `src` folder.
 - src/components - These is where all sharable components will go, i.e., images. icons, etc.
