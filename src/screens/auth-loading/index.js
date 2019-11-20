@@ -43,7 +43,7 @@ export const AuthLoading = view(({ navigation }) => {
       navigation.navigate('Login');
     } else {
       console.debug('user is authed');
-      navigation.navigate('Schedule');
+      navigation.navigate('OnBoardingRoutes');
     }
   }
 

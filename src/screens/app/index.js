@@ -1,12 +1,19 @@
-import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
 import { Schedule } from './schedule';
+import { OnBoardingRoutes } from './onboarding';
 
-export const AppRoutes = createStackNavigator(
-  {
-    Schedule,
-  },
-  {
-    initialRouteName: 'Schedule',
-  },
+
+export const AppRoutes = createAppContainer(
+  createSwitchNavigator(
+    {
+      // TODO: Need to figure out if the user has already completed onboarding and if so, then we need
+      //  to send them to the app section
+      OnBoardingRoutes,
+      Schedule,
+    },
+    {
+      initialRouteName: 'OnBoardingRoutes',
+    },
+  ),
 );
