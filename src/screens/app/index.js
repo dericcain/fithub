@@ -1,13 +1,13 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
-import { Schedule } from './schedule';
 import { OnBoardingRoutes } from './onboarding';
+import { Trainer } from './trainer';
 
 export const AppRoutes = createAppContainer(
   createSwitchNavigator(
     {
       OnBoardingRoutes,
-      Schedule,
+      Trainer,
     },
     {
       initialRouteName: 'OnBoardingRoutes',

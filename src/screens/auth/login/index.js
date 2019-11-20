@@ -57,9 +57,11 @@ export const Login = view(({ navigation }) => {
       }
 
       if (User.hasCompletedOnBoarding) {
-        // TODO: Still need to figure out if this is a trainer or a trainee here and
-        //  send them to the correct place.
-        navigation.push('Schedule');
+        if (User.isTrainer) {
+          navigation.navigate('Trainer');
+        } else {
+          navigation.navigate('Trainee');
+        }
       } else {
         navigation.push('OnBoardingRoutes');
       }

@@ -58,9 +58,11 @@ export const AuthLoading = view(({ navigation }) => {
       console.debug('user not authed');
       navigation.navigate('Login');
     } else if (User.hasCompletedOnBoarding) {
-      // TODO: Still need to figure out if this is a trainer or a trainee here and
-      //  send them to the correct place.
-      navigation.navigate('Schedule');
+      if (User.isTrainer) {
+        navigation.navigate('Trainer');
+      } else {
+        navigation.navigate('Trainee');
+      }
       console.debug('user is authed and navigating to main page');
     } else {
       console.debug('user is authed and navigating to onboarding');
