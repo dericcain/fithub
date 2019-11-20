@@ -18,19 +18,35 @@ const Container = styled.View`
 export const AuthLoading = view(({ navigation }) => {
   const [initializing, setInitializing] = useState(true);
 
-  const onAuthStateChanged = user => {
-    if (user) {
-      console.debug('user is being set');
-      User.setUser(user._user);
-    } else {
-      console.debug('user is being removed');
-      User.removeUser();
+  const onAuthStateChanged = async user => {
+    try {
+      console.debug('auth state changed', user);
+      if (user) {
+        console.debug('user is being set');
+        const doc = await firebase
+          .firestore()
+          .collection('users')
+          .doc(user._user.uid)
+          .get();
+
+        if (doc.exists) {
+          const u = doc.data();
+          User.setUser(u);
+        } else {
+          User.setUser(user._user);
+        }
+      } else {
+        console.debug('user is being removed');
+        User.removeUser();
+      }
+    } catch (error) {
+      throw new Error(error);
+    } finally {
+      setInitializing(false);
     }
-    setInitializing(false);
   };
 
   useEffect(() => {
-    // (async () => await checkAuth())();
     const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
     return () => {
       subscriber();
@@ -41,8 +57,13 @@ export const AuthLoading = view(({ navigation }) => {
     if (!User.isAuthed) {
       console.debug('user not authed');
       navigation.navigate('Login');
+    } else if (User.hasCompletedOnBoarding) {
+      // TODO: Still need to figure out if this is a trainer or a trainee here and
+      //  send them to the correct place.
+      navigation.navigate('Schedule');
+      console.debug('user is authed and navigating to main page');
     } else {
-      console.debug('user is authed');
+      console.debug('user is authed and navigating to onboarding');
       navigation.navigate('OnBoardingRoutes');
     }
   }
