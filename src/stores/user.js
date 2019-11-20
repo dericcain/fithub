@@ -11,6 +11,7 @@ export const User = store({
   isAvailable: true,
   isTrainer: false,
   postalCode: '',
+  hasCompletedOnBoarding: false,
   hours: {
     sunday: {
       start: '',
@@ -52,6 +53,7 @@ export const User = store({
       isTrainer: User.isTrainer,
       postalCode: User.postalCode,
       hours: User.hours,
+      hasCompletedOnBoarding: User.hasCompletedOnBoarding,
     };
   },
   get isAuthed() {
@@ -67,6 +69,7 @@ export const User = store({
     isTrainer,
     postalCode,
     availability,
+    hasCompletedOnBoarding,
   }) {
     User.uid = uid;
     User.displayName = displayName;
@@ -77,6 +80,7 @@ export const User = store({
     User.isTrainer = isTrainer;
     User.postalCode = postalCode;
     User.availability = availability;
+    User.hasCompletedOnBoarding = hasCompletedOnBoarding;
   },
   setPostalCode(postalCode) {
     User.postalCode = postalCode;
@@ -86,6 +90,7 @@ export const User = store({
       User.isTrainer = true;
       // Not sure why we need to set this but it is ending up undefined for some reason
       User.isAvailable = true;
+      User.hasCompletedOnBoarding = true;
       await firebase
         .firestore()
         .collection('users')
@@ -100,6 +105,7 @@ export const User = store({
       User.isTrainer = false;
       // Not sure why we need to set this but it is ending up undefined for some reason
       User.isAvailable = true;
+      User.hasCompletedOnBoarding = true;
       await firebase
         .firestore()
         .collection('users')
@@ -108,5 +114,16 @@ export const User = store({
     } catch (error) {
       throw new Error(error);
     }
-  }
+  },
+  removeUser() {
+    User.uid = '';
+    User.displayName = '';
+    User.email = '';
+    User.photoURL = '';
+    User.bio = '';
+    User.isAvailable = true;
+    User.isTrainer = false;
+    User.postalCode = '';
+    User.hasCompletedOnBoarding = false;
+  },
 });
