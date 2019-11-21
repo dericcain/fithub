@@ -13,10 +13,10 @@ import { User } from '../../../stores/user';
 
 GoogleSignin.configure({
   // We need Calendar scope here...
-  scopes: ['https://www.googleapis.com/auth/calendar'], // what API you want to access on behalf of the user, default is email and profile
-  // Maybe this should go somewhere secure, but for this project, whatever...
+  scopes: ['https://www.googleapis.com/auth/calendar'],
   webClientId:
     '313017879174-c59296h7qtlfjhq0dcq5csk5d1a55hib.apps.googleusercontent.com',
+  offlineAccess: true,
 });
 
 const Container = styled.View`
@@ -38,6 +38,7 @@ export const Login = view(({ navigation }) => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
+      const { serverAuthCode } = userInfo;
       const credential = firebase.auth.GoogleAuthProvider.credential(
         userInfo.idToken,
         userInfo.accessToken,

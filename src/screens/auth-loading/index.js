@@ -5,6 +5,7 @@ import styled from 'styled-components/native';
 import { firebase } from '@react-native-firebase/auth';
 
 import { User } from '../../stores/user';
+import { GoogleSignin } from '@react-native-community/google-signin';
 
 const Container = styled.View`
   display: flex;
@@ -22,6 +23,7 @@ export const AuthLoading = view(({ navigation }) => {
     try {
       console.debug('auth state changed', user);
       if (user) {
+        // TODO: We need to attache the serverauthcode to the user in firebase database
         console.debug('user is being set');
         const doc = await firebase
           .firestore()

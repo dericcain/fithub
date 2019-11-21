@@ -18,8 +18,8 @@ export const ContainerWithHeader = ({ title, children }) => {
           style: { color: '#fff', fontSize: 18 },
         }}
         rightComponent={{
-          icon: 'notification',
-          type: 'antdesign',
+          icon: 'notifications',
+          type: 'material',
           color: '#fff',
         }}
       />
