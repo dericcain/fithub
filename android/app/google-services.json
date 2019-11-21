@@ -8,12 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:313017879174:android:7ca544e0247a59dd891f07",
+        "mobilesdk_app_id": "1:313017879174:android:1674e7113daccfcd891f07",
         "android_client_info": {
           "package_name": "com.labdays"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "313017879174-4umfpqhnunnncanqt5ehhv7vu4lhinlj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.labdays",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
         {
           "client_id": "313017879174-c59296h7qtlfjhq0dcq5csk5d1a55hib.apps.googleusercontent.com",
           "client_type": 3
@@ -28,7 +36,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "313017879174-c59296h7qtlfjhq0dcq5csk5d1a55hib.apps.googleusercontent.com",
+              "client_id": "313017879174-smoahcsderaaprplpvg8a6ka3gtacg54.apps.googleusercontent.com",
               "client_type": 3
             },
             {
