@@ -3,6 +3,7 @@ export const colors = {
     dark: '#120638',
     default: '#393680',
     light: '#564760',
+    lighter: '#94859e',
   },
   grey: {
     light: '#f7f6f6',

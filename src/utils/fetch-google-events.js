@@ -1,5 +1,6 @@
 import { GoogleSignin } from '@react-native-community/google-signin';
 import { format } from 'date-fns';
+import { Events } from '../stores/events';
 
 const FORMAT = 'yyyy-MM-dd';
 const FORMAT_TIME = 'h:mma';
@@ -13,7 +14,7 @@ function addIsoDays(days) {
 const googleNow = new Date().toISOString();
 const googleLater = addIsoDays(RANGE).toISOString();
 
-export const fetchGoogleEvents = async () => {
+export const fetchGoogleEvents = async (addToEventsStore = false) => {
   const url = `https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMin=${googleNow}&timeMax=${googleLater}&orderBy=startTime&singleEvents=true`;
   try {
     const { accessToken } = await GoogleSignin.getTokens();
@@ -27,7 +28,7 @@ export const fetchGoogleEvents = async () => {
     const events = await res.json();
     return events.items.reduce((acc, { start, end, summary }) => {
       let day;
-      let e = {
+      const e = {
         name: summary,
         allDayEvent: false,
         startTime: null,
@@ -40,6 +41,9 @@ export const fetchGoogleEvents = async () => {
         day = format(new Date(start.dateTime), FORMAT);
         e.startTime = format(new Date(start.dateTime), FORMAT_TIME);
         e.endTime = format(new Date(end.dateTime), FORMAT_TIME);
+      }
+      if (addToEventsStore) {
+        Events.addEvent(day, e);
       }
       if (day in acc) {
         acc[day].push(e);

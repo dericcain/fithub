@@ -160,11 +160,12 @@ export const Packages = view(() => {
               title={p.name}
               info={[p.description]}
               button={{
-                title: 'DELETE',
-                icon: 'delete',
+                title: 'EDIT',
+                icon: 'edit',
                 buttonStyle: {
                   backgroundColor: colors.danger,
                 },
+                titleStyle: { marginLeft: 12 }
               }}
               onButtonPress={viewPackage}
               color={colors.purple.default}
