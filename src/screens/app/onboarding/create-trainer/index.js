@@ -10,7 +10,8 @@ export const CreateTrainer = view(({ navigation }) => {
   return (
     <Container>
       <Text h4 style={{ marginBottom: 24 }}>
-        Awesome! There are plenty of people waiting for you to get them in shape.
+        Awesome! There are plenty of people waiting for you to get them in
+        shape.
       </Text>
       <ButtonContainer>
         <Input

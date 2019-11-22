@@ -4,7 +4,8 @@ import { OnBoardingRoutes } from './onboarding';
 import { Trainer } from './trainer';
 import { Trainee } from './trainee';
 import { Payments } from './trainee/payments';
-import { PaymentSuccess } from './trainee/paymentsuccess'
+import { TrainerPackages } from './trainee/trainer-packages';
+import { PaymentSuccess } from './trainee/paymentsuccess';
 
 export const AppRoutes = createAppContainer(
   createSwitchNavigator(
@@ -13,6 +14,7 @@ export const AppRoutes = createAppContainer(
       Trainer,
       Trainee,
       Payments,
+      TrainerPackages,
       PaymentSuccess,
     },
     {

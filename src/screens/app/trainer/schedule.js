@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
 import { Avatar, Icon, Text } from 'react-native-elements';
 import styled from 'styled-components/native';
 import { addDays, format, subDays } from 'date-fns';
@@ -21,6 +20,14 @@ import {
   NoEvents,
 } from '../../../components/event';
 import { colors } from '../../../assets/colors';
+import { Events } from '../../../stores/events';
+import { User } from '../../../stores/user';
+
+const initials = name =>
+  name
+    .split(' ')
+    .map(n => n[0])
+    .join('');
 
 const ListContainer = styled.View`
   flex-direction: column;
@@ -34,18 +41,23 @@ const RANGE = 60;
 const now = new Date();
 
 export const Schedule = view(() => {
-  const [userEvents, setUserEvents] = useState({});
   useEffect(() => {
-    fetchGoogleEvents().then(events => {
-      setUserEvents(events);
-    });
+    fetchGoogleEvents(true);
+    Events.fetchEvents(User.uid);
   }, []);
 
   const getTimeText = (isAllDayEvent, start, end) =>
     isAllDayEvent ? 'All day event' : `${start} - ${end}`;
 
-  const renderItem = ({ name, allDayEvent, startTime, endTime }) => (
-    <Event>
+  const renderItem = ({
+    name,
+    allDayEvent,
+    startTime,
+    endTime,
+    participant,
+    price,
+  }) => (
+    <Event isFithubEvent={!!participant}>
       <EventLeft>
         <EventTime>
           <EventTimeText>
@@ -53,16 +65,21 @@ export const Schedule = view(() => {
           </EventTimeText>
         </EventTime>
         <EventName>
-          <EventNameText>{name}</EventNameText>
+          <EventNameText>{participant ? participant : name}</EventNameText>
         </EventName>
         <EventDetails>
-          <EventDetailsText>
-            These are some details of the event....
-          </EventDetailsText>
+          <EventDetailsText>{participant && `$${price}: ${name}`}</EventDetailsText>
         </EventDetails>
       </EventLeft>
       <EventRight>
-        <Avatar rounded size="small" title="DC" />
+        {participant && (
+          <Avatar
+            rounded
+            size="small"
+            title={initials(participant)}
+            overlayContainerStyle={{ backgroundColor: colors.purple.lighter }}
+          />
+        )}
       </EventRight>
     </Event>
   );
@@ -87,7 +104,7 @@ export const Schedule = view(() => {
     <ContainerWithHeader title="Schedule">
       <ListContainer>
         <Agenda
-          items={userEvents}
+          items={Events.events}
           selected={format(now, FORMAT)}
           minDate={format(subDays(now, RANGE), FORMAT)}
           maxDate={format(addDays(now, RANGE), FORMAT)}
@@ -100,7 +117,11 @@ export const Schedule = view(() => {
           theme={{
             selectedDayBackgroundColor: colors.purple.light,
             todayTextColor: colors.accent,
+            dayTextColor: colors.grey.dark,
             dotColor: colors.success,
+            textSectionTitleColor: colors.grey.dark,
+            agendaTodayColor: colors.purple.default,
+            agendaKnobColor: colors.accent,
           }}
         />
       </ListContainer>

@@ -57,9 +57,9 @@ export const Login = view(({ navigation }) => {
         .get();
       if (doc.exists) {
         const u = doc.data();
-        User.setUser(u);
+        User.setUser({ ...u, serverAuthCode });
       } else {
-        User.setUser(user._user);
+        User.setUser({ ...user._user, serverAuthCode });
       }
 
       if (User.hasCompletedOnBoarding) {
