@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import {
   Input,
   Button,
@@ -171,7 +171,9 @@ export const Payments = ({ navigation }) => {
               paddingLeft: 25,
               paddingRight: 25,
             }}
-            onPress={() => navigation.navigate('PaymentSuccess')}
+            onPress={() =>
+              setTimeout(() => navigation.navigate('PaymentSuccess'), 3000)
+            }
           />
           <Overlay
             isVisible={false}
