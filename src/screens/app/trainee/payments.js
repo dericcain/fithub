@@ -1,9 +1,16 @@
-import React from 'react';
-import { Input, Button } from 'react-native-elements';
+import React, { useState } from 'react';
+import {
+  Input,
+  Button,
+  Icon,
+  PricingCard,
+  Overlay,
+} from 'react-native-elements';
 import styled from 'styled-components/native';
-import { ScrollView, Text, StyleSheet } from 'react-native';
+import { ScrollView, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { ContainerWithHeader } from '../../../components/container-with-header';
 import ModalDropdown from 'react-native-modal-dropdown';
+import { colors } from '../../../assets/colors';
 
 const MONTHS = [
   '01',
@@ -28,7 +35,6 @@ const PaymentContainer = styled.View`
   width: 100%;
 `;
 
-
 const PaymentOptions = styled.View`
   background: #ffffff;
   opacity: 0.63;
@@ -44,8 +50,6 @@ const CreditCardCCV = styled.View`
   width: 62%;
 `;
 
-
-
 const Package = styled.Text`
   font-size: 20px;
   font-weight: 400;
@@ -58,7 +62,7 @@ const styles = StyleSheet.create({
     width: 55,
     marginBottom: 5,
     borderRadius: 6,
-    backgroundColor: 'cornflowerblue',
+    backgroundColor: colors.purple.default,
   },
   dropdown_text: {
     marginVertical: 5,
@@ -70,7 +74,7 @@ const styles = StyleSheet.create({
   dropdown_dropdown: {
     width: 75,
     height: 200,
-    borderColor: 'cornflowerblue',
+    borderColor: colors.purple.default,
     borderWidth: 2,
     borderRadius: 3,
   },
@@ -80,12 +84,23 @@ const styles = StyleSheet.create({
     color: 'grey',
     marginBottom: 5,
   },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10,
+  },
 });
 
-export const Payments = () => {
+export const Payments = ({ navigation }) => {
   return (
     <ContainerWithHeader title="$ Secure Your Spot">
-      <Package>Butch Body Special 75.00  60min - make this pretty and dynamic</Package>
+      <Package>
+        Butch Body Special 75.00 60min - make this pretty and dynamic
+      </Package>
       <PaymentContainer>
         <ScrollView>
           <PaymentOptions>
@@ -148,13 +163,28 @@ export const Payments = () => {
           </PaymentOptions>
 
           <Button
-            class="pay"
             title="$xx.xx Pay Now"
             style={{ marginTop: 10, paddingLeft: 25, paddingRight: 25 }}
-            onPress={() => {
-              console.log('You clicked the button');
+            buttonStyle={{
+              backgroundColor: colors.purple.default,
+              marginTop: 20,
+              paddingLeft: 25,
+              paddingRight: 25,
             }}
+            onPress={() => navigation.navigate('PaymentSuccess')}
           />
+          <Overlay
+            isVisible={false}
+            windowBackgroundColor="rgba(255, 255, 255, .5)"
+            overlayBackgroundColor={colors.purple.default}
+            width="auto"
+            height="auto"
+            borderRadius={6}>
+            <Text style={{ marginBottom: 24, color: colors.white }}>
+              Processing Payment
+            </Text>
+            <ActivityIndicator size="large" color={colors.white} />
+          </Overlay>
         </ScrollView>
       </PaymentContainer>
     </ContainerWithHeader>
