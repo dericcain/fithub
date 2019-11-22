@@ -11,7 +11,7 @@ const TrainerContainer = styled.View`
   width: 100%;
 `;
 
-export const Trainers = () => {
+export const Trainers = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
   const [trainers, setTrainers] = useState([]);
 
@@ -50,8 +50,9 @@ export const Trainers = () => {
           {trainers.map(trainer => (
             <ListItem
               title={trainer.displayName}
-              subtitle={trainer.bio}
-              leftAvatar={{ source: { uri: trainer.photoUrl } }}
+              subtitle={(trainer.bio ? 'Bio: ' + trainer.bio : '')}
+              leftAvatar={{ source: { uri: trainer.photoURL } }}
+              onPress={() => navigation.navigate('TrainerPackages', {trainer: trainer})}
               bottomDivider
               chevron
             />
