@@ -1,15 +1,19 @@
 import React from 'react';
+import { Image, Dimensions } from 'react-native';
 import styled from 'styled-components/native';
+import LinearGradient from 'react-native-linear-gradient';
 import { view } from 'react-easy-state';
 import {
   GoogleSignin,
-  GoogleSigninButton,
   statusCodes,
 } from '@react-native-community/google-signin';
 import { firebase } from '@react-native-firebase/auth';
-import { Text } from 'react-native-elements';
+import { Text, Button } from 'react-native-elements';
 
 import { User } from '../../../stores/user';
+
+const screenWidth = Math.round(Dimensions.get('window').width);
+const screenHeight = Math.round(Dimensions.get('window').height * 0.35);
 
 GoogleSignin.configure({
   // We need Calendar scope here...
@@ -35,6 +39,7 @@ const ButtonWrapper = styled.View`
 
 export const Login = view(({ navigation }) => {
   const googleSignin = async () => {
+    console.log('Pressed');
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
@@ -84,16 +89,45 @@ export const Login = view(({ navigation }) => {
   };
 
   return (
-    <Container>
-      <Text h4>Login</Text>
-      <ButtonWrapper>
-        <GoogleSigninButton
-          size={GoogleSigninButton.Size.Wide}
-          color={GoogleSigninButton.Color.Light}
-          onPress={googleSignin}
-          disabled={false}
-        />
-      </ButtonWrapper>
-    </Container>
+    <LinearGradient
+      colors={['#5c0240', '#8b601f']}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      style={{ flex: 1 }}>
+      <Container>
+        <Text h6 style={{ color: '#fff', maxWidth: 260, textAlign: 'center' }}>
+          Bringing the personal back into personal trainer.
+        </Text>
+        <ButtonWrapper>
+          <Button
+            style={{ zIndex: 1 }}
+            title="Sign in with Google"
+            onPress={googleSignin}
+            buttonStyle={{
+              borderRadius: 14,
+              backgroundColor: '#393680',
+              paddingHorizontal: 24,
+              paddingVertical: 12,
+            }}
+            icon={{ name: 'googleplus', type: 'antdesign', color: 'white' }}
+            iconContainerStyle={{
+              marginRight: 24,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          />
+        </ButtonWrapper>
+      </Container>
+      <Image
+        style={{
+          width: screenWidth,
+          height: screenHeight,
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+        }}
+        source={require('../../../assets/images/login-bg.png')}
+      />
+    </LinearGradient>
   );
 });
