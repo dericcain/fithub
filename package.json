@@ -21,6 +21,7 @@
     "react-native": "^0.61.4",
     "react-native-calendars": "^1.214.0",
     "react-native-elements": "^1.2.7",
+    "react-native-floating-action": "^1.19.1",
     "react-native-gesture-handler": "^1.5.0",
     "react-native-reanimated": "^1.4.0",
     "react-native-screens": "^1.0.0-alpha.23",

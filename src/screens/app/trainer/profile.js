@@ -26,5 +26,5 @@ export const Profile = view(({ navigation }) => {
 });
 
 Profile.navigationOptions = {
-  tabBarIcon: () => <Icon name="user" type="antdesign" />,
+  tabBarIcon: ({ tintColor }) => <Icon name="user" type="antdesign" color={tintColor} />,
 };

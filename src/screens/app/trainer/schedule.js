@@ -20,6 +20,7 @@ import {
   EventTimeText,
   NoEvents,
 } from '../../../components/event';
+import { colors } from '../../../assets/colors';
 
 const ListContainer = styled.View`
   flex-direction: column;
@@ -96,6 +97,11 @@ export const Schedule = view(() => {
           renderEmptyDate={renderEmptyDay}
           rowHasChanged={rowHasChanged}
           renderEmptyData={renderEmptyData}
+          theme={{
+            selectedDayBackgroundColor: colors.purple.light,
+            todayTextColor: colors.accent,
+            dotColor: colors.success,
+          }}
         />
       </ListContainer>
     </ContainerWithHeader>
@@ -103,21 +109,7 @@ export const Schedule = view(() => {
 });
 
 Schedule.navigationOptions = {
-  tabBarIcon: () => <Icon name="calendar" type="antdesign" />,
+  tabBarIcon: ({ tintColor }) => (
+    <Icon name="calendar" type="antdesign" color={tintColor} />
+  ),
 };
-
-const styles = StyleSheet.create({
-  item: {
-    backgroundColor: 'white',
-    flex: 1,
-    borderRadius: 5,
-    padding: 10,
-    marginRight: 10,
-    marginTop: 17,
-  },
-  emptyDate: {
-    height: 15,
-    flex: 1,
-    paddingTop: 30,
-  },
-});
