@@ -21,6 +21,7 @@
     "react-native": "^0.61.4",
     "react-native-calendars": "^1.214.0",
     "react-native-elements": "^1.2.7",
+    "react-native-floating-action": "^1.19.1",
     "react-native-gesture-handler": "^1.5.0",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-modal-dropdown": "^0.7.0",
