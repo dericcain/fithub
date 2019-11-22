@@ -12,6 +12,7 @@ export const User = store({
   isTrainer: false,
   postalCode: '',
   hasCompletedOnBoarding: false,
+  serverAuthCode: '',
   hours: {
     sunday: {
       start: '',
@@ -54,6 +55,7 @@ export const User = store({
       postalCode: User.postalCode,
       hours: User.hours,
       hasCompletedOnBoarding: User.hasCompletedOnBoarding,
+      serverAuthCode: User.serverAuthCode,
     };
   },
   get isAuthed() {
@@ -70,6 +72,7 @@ export const User = store({
     postalCode,
     availability,
     hasCompletedOnBoarding,
+    serverAuthCode,
   }) {
     User.uid = uid;
     User.displayName = displayName;
@@ -81,6 +84,7 @@ export const User = store({
     User.postalCode = postalCode;
     User.availability = availability;
     User.hasCompletedOnBoarding = hasCompletedOnBoarding;
+    User.serverAuthCode = serverAuthCode;
   },
   setPostalCode(postalCode) {
     User.postalCode = postalCode;

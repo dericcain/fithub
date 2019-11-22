@@ -8,13 +8,19 @@ export const NoEvents = styled.View`
 `;
 
 export const Event = styled.View`
-  background-color: white;
-  flex: 1;
   flex-direction: row;
+  background-color: white;
   border-radius: 2px;
   margin-right: 10px;
   margin-top: 17px;
-  height: auto;
+  ${({ isFithubEvent }) =>
+    isFithubEvent
+      ? `
+  border-left-color: ${colors.accent};
+  border-left-width: 4px;
+  border-style: solid;
+  `
+      : ''}
 `;
 
 export const EventLeft = styled.View`
@@ -34,8 +40,8 @@ export const EventTime = styled.View`
 `;
 
 export const EventTimeText = styled.Text`
-  font-weight: 500;
-  color: ${colors.text.default};
+  font-weight: 400;
+  color: ${colors.purple.lighter};
 `;
 
 export const EventName = styled.View`

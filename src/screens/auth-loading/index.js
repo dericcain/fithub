@@ -23,7 +23,6 @@ export const AuthLoading = view(({ navigation }) => {
     try {
       console.debug('auth state changed', user);
       if (user) {
-        // TODO: We need to attache the serverauthcode to the user in firebase database
         console.debug('user is being set');
         const doc = await firebase
           .firestore()
@@ -41,6 +40,7 @@ export const AuthLoading = view(({ navigation }) => {
         console.debug('user is being removed');
         User.removeUser();
       }
+      await GoogleSignin.signInSilently();
     } catch (error) {
       throw new Error(error);
     } finally {
