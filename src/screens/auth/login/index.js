@@ -39,7 +39,6 @@ const ButtonWrapper = styled.View`
 
 export const Login = view(({ navigation }) => {
   const googleSignin = async () => {
-    console.log('Pressed');
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
