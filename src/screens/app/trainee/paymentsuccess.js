@@ -1,6 +1,6 @@
 import { colors } from '../../../assets/colors';
-import React from 'react';
-import { Image, Dimensions, TouchableHighlight, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { Image, Dimensions, View } from 'react-native';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Text, Icon } from 'react-native-elements';
@@ -18,7 +18,12 @@ const Container = styled.View`
   justify-content: center;
 `;
 
-export const PaymentSuccess = () => {
+export const PaymentSuccess = ({ navigation }) => {
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate('Trainers');
+    }, 3000);
+  });
   return (
     <LinearGradient
       colors={['#5c0240', '#8b601f']}
@@ -29,23 +34,35 @@ export const PaymentSuccess = () => {
         <View
           style={{
             borderRadius: Math.round(screenWidth + screenHeight) / 2,
-            width: screenWidth/1.5,
-            height: screenWidth/1.5,
+            width: screenWidth / 1.5,
+            height: screenWidth / 1.5,
             backgroundColor: '#fff',
             justifyContent: 'center',
             alignItems: 'center',
           }}
-          underlayColor="#ccc"
-          onPress={() => alert('Yaa!')}>
+          underlayColor="#ccc">
           <Text
             h5
-            style={{ color: colors.text.default, maxWidth: 260, textAlign: 'center' }}>
+            style={{
+              color: colors.text.default,
+              maxWidth: 260,
+              textAlign: 'center',
+            }}>
             Payment Successful
           </Text>
-          <Icon padding={8} name="check-circle" color={colors.purple.default} size={50} />
+          <Icon
+            padding={8}
+            name="check-circle"
+            color={colors.purple.default}
+            size={50}
+          />
           <Text
             h5
-            style={{ color: colors.text.default , maxWidth: 260, textAlign: 'center' }}>
+            style={{
+              color: colors.text.default,
+              maxWidth: 260,
+              textAlign: 'center',
+            }}>
             You are good to go!
           </Text>
         </View>

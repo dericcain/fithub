@@ -2,14 +2,13 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import { Profile } from './profile';
 import { Trainers } from './trainers';
-import { Payments } from './payments';
-import { TrainerPackages } from './trainer-packages';
-import { PaymentSuccess } from './paymentsuccess';
 import { colors } from '../../../assets/colors';
+import { Schedule } from './schedule';
 
 export const Trainee = createBottomTabNavigator(
   {
     Trainers,
+    Schedule,
     Profile,
   },
   {

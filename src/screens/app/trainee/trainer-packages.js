@@ -22,10 +22,11 @@ export const TrainerPackages = ({ navigation }) => {
 
     snapshot.forEach(trainerPackage => {
       // TODO: use user object
-      p.push(trainerPackage.data());
+      p.push({ id: trainerPackage.id, ...trainerPackage.data() });
     });
 
     setPackages(p);
+    console.log(p);
     setLoading(false);
   }
 
@@ -44,6 +45,10 @@ export const TrainerPackages = ({ navigation }) => {
     return <Text>Loading Trainer Packages...</Text>;
   }
 
+  const navigateToPayment = selectedPackage => {
+    navigation.navigate('Payments', { selectedPackage });
+  };
+
   return (
     <ContainerWithHeader
       title="Select a Package"
@@ -59,9 +64,31 @@ export const TrainerPackages = ({ navigation }) => {
         <ScrollView>
           {packages.map(trainerPackage => (
             <ListItem
+              key={trainerPackage.id}
               title={trainerPackage.name}
-              subtitle={trainerPackage.duration + 'min'}
-              rightTitle={<Button title={'$' + trainerPackage.price} />}
+              titleStyle={{
+                fontSize: 22,
+                fontWeight: '400',
+                color: colors.purple.dark,
+              }}
+              subtitle={trainerPackage.description}
+              subtitleStyle={{
+                fontWeight: '300',
+                color: colors.grey.darker,
+              }}
+              rightSubtitle={trainerPackage.duration + 'min'}
+              rightSubtitleStyle={{
+                marginTop: 4,
+                fontWeight: '600',
+                color: colors.grey.dark,
+              }}
+              rightTitle={
+                <Button
+                  title={'$' + trainerPackage.price}
+                  onPress={() => navigateToPayment(trainerPackage)}
+                  buttonStyle={{ backgroundColor: colors.purple.default }}
+                />
+              }
               bottomDivider
             />
           ))}
