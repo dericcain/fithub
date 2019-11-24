@@ -19,13 +19,14 @@ export const Events = store({
     firebase
       .firestore()
       .collection('events')
-      .where('userId', '==', userId)
+      .where('trainerId', '==', userId)
       .get()
       .then(r => {
         if (!r.empty) {
           Events.events = {};
           r.forEach(d => {
             const event = d.data();
+            console.log(event);
             const day = format(new Date(event.startTime.toDate()), FORMAT);
             const e = {
               name: event.name,
