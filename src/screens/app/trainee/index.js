@@ -2,11 +2,17 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import { Profile } from './profile';
 import { Trainers } from './trainers';
+import { Payments } from './payments';
+import { TrainerPackages } from './trainer-packages';
+import { PaymentSuccess } from './paymentsuccess';
 
 export const Trainee = createBottomTabNavigator(
   {
     Profile,
     Trainers,
+    Payments,
+    TrainerPackages,
+    PaymentSuccess,
   },
   {
     initialRouteName: 'Trainers',
