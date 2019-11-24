@@ -1,85 +1,30 @@
 import React, { useState } from 'react';
 import { ScrollView } from 'react-native';
-import styled from 'styled-components/native';
-import { Text, Button, Input, Avatar, Icon } from 'react-native-elements';
+import { Avatar, Button, Icon, Input, Text } from 'react-native-elements';
 import { view } from 'react-easy-state';
 
-import { User } from '../../../../stores/user';
+import { specialties, User } from '../../../../stores/user';
 import { colors } from '../../../../assets/colors';
 import { TimeInput } from '../../../../components/time-input';
 import { ToggleButton } from '../../../../components/toggle-button';
-
-const Container = styled.View`
-  flex: 1;
-`;
-
-const Top = styled.View`
-  height: 300px;
-  width: 100%;
-  padding: 36px;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Middle = styled.View`
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 120px;
-  padding: 24px;
-`;
-
-const Bottom = styled.View`
-  flex: 3;
-  padding: 24px;
-  align-items: center;
-  background-color: ${colors.purple.dark};
-`;
-
-const HeaderImage = styled.Image`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 220px;
-`;
-
-const ZipContainer = styled.View`
-  max-width: 200px;
-`;
-
-const VeryBottom = styled.View`
-  padding: 24px;
-`;
-
-const SpecialtiesContainer = styled.View`
-  flex: 1;
-  flex-direction: row;
-`;
-
-const SpecialtyLeft = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: flex-end;
-  padding: 6px;
-`;
-
-const SpecialtyRight = styled(SpecialtyLeft)`
-  align-items: flex-start;
-`;
-
-const specialties = [
-  'Strength Training',
-  'Weight Loss',
-  'Sports Training',
-  'Competition',
-];
+import {
+  Bottom,
+  Container,
+  HeaderImage,
+  Middle,
+  SpecialtiesContainer,
+  SpecialtyLeft,
+  SpecialtyRight,
+  Top,
+  VeryBottom,
+  ZipContainer,
+} from '../../../../components/create-user';
 
 export const CreateTrainer = view(({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const createTrainer = () => {
     setLoading(true);
-    User.createTrainer(navigation);
+    User.createUser(navigation, true);
   };
 
   return (
