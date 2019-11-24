@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Icon, Text, ListItem, Button, Avatar } from 'react-native-elements';
+import { Text, ListItem, Button, Avatar } from 'react-native-elements';
 import styled from 'styled-components/native';
 import { firebase } from '@react-native-firebase/firestore';
-import { Packages } from '../../../stores/packages';
+
 import { ContainerWithHeader } from '../../../components/container-with-header';
 import { ScrollView } from 'react-native';
+import { colors } from '../../../assets/colors';
 
 const PackageContainer = styled.View`
   flex: 1;
@@ -17,14 +18,14 @@ export const TrainerPackages = ({ navigation }) => {
   const [packages, setPackages] = useState([]);
 
   function onSnapshot(snapshot) {
-    const packages = [];
+    const p = [];
 
     snapshot.forEach(trainerPackage => {
       // TODO: use user object
-      packages.push(trainerPackage.data());
+      p.push(trainerPackage.data());
     });
 
-    setPackages(packages);
+    setPackages(p);
     setLoading(false);
   }
 
@@ -37,14 +38,21 @@ export const TrainerPackages = ({ navigation }) => {
 
     query.onSnapshot(onSnapshot);
     query.get();
-  }, []);
+  }, [trainer.uid]);
 
   if (loading) {
     return <Text>Loading Trainer Packages...</Text>;
   }
 
   return (
-    <ContainerWithHeader title="Select a Package">
+    <ContainerWithHeader
+      title="Select a Package"
+      leftComponent={{
+        icon: 'left',
+        type: 'antdesign',
+        color: colors.white,
+        onPress: () => navigation.navigate('Trainers'),
+      }}>
       <Avatar rounded size="large" source={{ uri: trainer.photoURL }} />
       <Text h4>{trainer.displayName}</Text>
       <PackageContainer>
@@ -53,20 +61,12 @@ export const TrainerPackages = ({ navigation }) => {
             <ListItem
               title={trainerPackage.name}
               subtitle={trainerPackage.duration + 'min'}
-              rightTitle={
-                <Button
-                  title={'$' + trainerPackage.price}
-                />
-              }
+              rightTitle={<Button title={'$' + trainerPackage.price} />}
               bottomDivider
             />
           ))}
         </ScrollView>
       </PackageContainer>
-      <Button
-        title="Go back"
-        onPress={() => navigation.navigate('Trainers')}
-      />
     </ContainerWithHeader>
   );
 };

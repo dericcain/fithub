@@ -16,14 +16,14 @@ export const Trainers = ({ navigation }) => {
   const [trainers, setTrainers] = useState([]);
 
   function onSnapshot(snapshot) {
-    const trainers = [];
+    const t = [];
 
     snapshot.forEach(trainer => {
       // TODO: use user object
-      trainers.push(trainer.data());
+      t.push(trainer.data());
     });
 
-    setTrainers(trainers);
+    setTrainers(t);
     setLoading(false);
   }
 
@@ -50,11 +50,13 @@ export const Trainers = ({ navigation }) => {
           {trainers.map(trainer => (
             <ListItem
               title={trainer.displayName}
-              subtitle={(trainer.bio ? 'Bio: ' + trainer.bio : '')}
+              subtitle={trainer.bio ? 'Bio: ' + trainer.bio : ''}
               leftAvatar={{ source: { uri: trainer.photoURL } }}
-              onPress={() => navigation.navigate('TrainerPackages', {trainer: trainer})}
+              onPress={() =>
+                navigation.navigate('TrainerPackages', { trainer: trainer })
+              }
               bottomDivider
-              chevron
+              chevron={{ type: 'antdesign', name: 'right' }}
             />
           ))}
         </ScrollView>
@@ -64,5 +66,7 @@ export const Trainers = ({ navigation }) => {
 };
 
 Trainers.navigationOptions = {
-  tabBarIcon: () => <Icon name="team" type="antdesign" />,
+  tabBarIcon: ({ tintColor }) => (
+    <Icon name="team" type="antdesign" color={tintColor} />
+  ),
 };

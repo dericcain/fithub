@@ -10,7 +10,11 @@ const ContainerNoPadding = styled.View`
   justify-content: center;
 `;
 
-export const ContainerWithHeader = ({ title, children }) => {
+export const ContainerWithHeader = ({
+  title,
+  children,
+  leftComponent = {},
+}) => {
   return (
     <>
       <Header
@@ -20,6 +24,7 @@ export const ContainerWithHeader = ({ title, children }) => {
           text: title,
           style: { color: colors.white, fontSize: 18 },
         }}
+        leftComponent={leftComponent}
         rightComponent={{
           icon: 'notifications',
           type: 'material',

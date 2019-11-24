@@ -108,9 +108,9 @@ export const User = store({
   setPostalCode(postalCode) {
     User.postalCode = postalCode;
   },
-  async createTrainer(navigation) {
+  async createUser(navigation, isTrainer = false) {
     try {
-      User.isTrainer = true;
+      User.isTrainer = isTrainer;
       // Not sure why we need to set this but it is ending up undefined for some reason
       User.isAvailable = true;
       User.hasCompletedOnBoarding = true;
@@ -119,22 +119,11 @@ export const User = store({
         .collection('users')
         .doc(User.uid)
         .set(User.toJs);
-      navigation.navigate('Trainer');
-    } catch (error) {
-      throw new Error(error);
-    }
-  },
-  async createTrainee() {
-    try {
-      User.isTrainer = false;
-      // Not sure why we need to set this but it is ending up undefined for some reason
-      User.isAvailable = true;
-      User.hasCompletedOnBoarding = true;
-      await firebase
-        .firestore()
-        .collection('users')
-        .doc(User.uid)
-        .set(User.toJs);
+      if (isTrainer) {
+        navigation.navigate('Trainer');
+      } else {
+        navigation.navigate('Trainee');
+      }
     } catch (error) {
       throw new Error(error);
     }
@@ -151,3 +140,9 @@ export const User = store({
     User.hasCompletedOnBoarding = false;
   },
 });
+export const specialties = [
+  'Strength Training',
+  'Weight Loss',
+  'Sports Training',
+  'Competition',
+];
