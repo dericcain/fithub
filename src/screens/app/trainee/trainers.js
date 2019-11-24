@@ -49,6 +49,7 @@ export const Trainers = ({ navigation }) => {
         <ScrollView>
           {trainers.map(trainer => (
             <ListItem
+              key={trainer.displayName}
               title={trainer.displayName}
               subtitle={trainer.bio ? 'Bio: ' + trainer.bio : ''}
               leftAvatar={{ source: { uri: trainer.photoURL } }}
