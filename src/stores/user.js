@@ -89,6 +89,7 @@ export const User = store({
     postalCode,
     availability,
     hasCompletedOnBoarding,
+    hours,
     serverAuthCode,
     specialties,
   }) {
@@ -101,6 +102,7 @@ export const User = store({
     User.isTrainer = isTrainer;
     User.postalCode = postalCode;
     User.availability = availability;
+    User.hours = hours;
     User.hasCompletedOnBoarding = hasCompletedOnBoarding;
     User.serverAuthCode = serverAuthCode;
     User.specialties = specialties || [];
