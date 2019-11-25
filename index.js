@@ -9,4 +9,6 @@ if (__DEV__) {
   import('./src/debugger').then(() => console.log('Reactotron Configured'));
 }
 
+console.disableYellowBox = true;
+
 AppRegistry.registerComponent(appName, () => App);

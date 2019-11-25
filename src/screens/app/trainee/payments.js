@@ -134,6 +134,7 @@ export const Payments = ({ navigation }) => {
             name,
             trainer: displayName,
             trainerAvatar: photoURL,
+            participantEmail: User.email,
           });
       })
       .then(r => {
