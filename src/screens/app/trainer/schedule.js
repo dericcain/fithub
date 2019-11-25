@@ -68,7 +68,9 @@ export const Schedule = view(() => {
           <EventNameText>{participant ? participant : name}</EventNameText>
         </EventName>
         <EventDetails>
-          <EventDetailsText>{participant && `$${price}: ${name}`}</EventDetailsText>
+          <EventDetailsText>
+            {participant && `$${price}: ${name}`}
+          </EventDetailsText>
         </EventDetails>
       </EventLeft>
       <EventRight>

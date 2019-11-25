@@ -9,6 +9,7 @@ export const colors = {
     light: '#f7f6f6',
     default: '#ebebeb',
     dark: '#929292',
+    darker: '#777',
   },
   white: '#fff',
   danger: '#E64A19',

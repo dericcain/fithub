@@ -6,8 +6,11 @@ export const User = store({
   uid: '',
   displayName: '',
   email: '',
-  photoURL: '',
+  // This is the default avatar for a user...
+  photoURL:
+    'https://p125.p0.n0.cdn.getcloudapp.com/items/NQue6PPE/default-avatar.png?v=d582c75d7a94a7291ea546e13f745984',
   bio: '',
+  specialties: [],
   isAvailable: true,
   isTrainer: false,
   postalCode: '',
@@ -56,10 +59,24 @@ export const User = store({
       hours: User.hours,
       hasCompletedOnBoarding: User.hasCompletedOnBoarding,
       serverAuthCode: User.serverAuthCode,
+      specialties: User.specialties,
     };
   },
   get isAuthed() {
     return !!User.uid;
+  },
+  toggleSpecialty(s) {
+    if (User.specialties.includes(s)) {
+      User.removeSpecialty(s);
+    } else {
+      User.addSpecialty(s);
+    }
+  },
+  addSpecialty(s) {
+    User.specialties.push(s);
+  },
+  removeSpecialty(s) {
+    User.specialties = User.specialties.filter(sp => sp !== s);
   },
   setUser({
     uid,
@@ -74,6 +91,7 @@ export const User = store({
     hasCompletedOnBoarding,
     hours,
     serverAuthCode,
+    specialties,
   }) {
     User.uid = uid;
     User.displayName = displayName;
@@ -87,13 +105,14 @@ export const User = store({
     User.hours = hours;
     User.hasCompletedOnBoarding = hasCompletedOnBoarding;
     User.serverAuthCode = serverAuthCode;
+    User.specialties = specialties || [];
   },
   setPostalCode(postalCode) {
     User.postalCode = postalCode;
   },
-  async createTrainer() {
+  async createUser(navigation, isTrainer = false) {
     try {
-      User.isTrainer = true;
+      User.isTrainer = isTrainer;
       // Not sure why we need to set this but it is ending up undefined for some reason
       User.isAvailable = true;
       User.hasCompletedOnBoarding = true;
@@ -102,21 +121,11 @@ export const User = store({
         .collection('users')
         .doc(User.uid)
         .set(User.toJs);
-    } catch (error) {
-      throw new Error(error);
-    }
-  },
-  async createTrainee() {
-    try {
-      User.isTrainer = false;
-      // Not sure why we need to set this but it is ending up undefined for some reason
-      User.isAvailable = true;
-      User.hasCompletedOnBoarding = true;
-      await firebase
-        .firestore()
-        .collection('users')
-        .doc(User.uid)
-        .set(User.toJs);
+      if (isTrainer) {
+        navigation.navigate('Trainer');
+      } else {
+        navigation.navigate('Trainee');
+      }
     } catch (error) {
       throw new Error(error);
     }
@@ -133,3 +142,9 @@ export const User = store({
     User.hasCompletedOnBoarding = false;
   },
 });
+export const specialties = [
+  'Strength Training',
+  'Weight Loss',
+  'Sports Training',
+  'Competition',
+];

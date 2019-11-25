@@ -14,11 +14,44 @@ export const Events = store({
       Events.events[day] = [event];
     }
   },
+
   fetchEvents(userId) {
     firebase
       .firestore()
       .collection('events')
-      .where('userId', '==', userId)
+      .where('trainerId', '==', userId)
+      .get()
+      .then(r => {
+        if (!r.empty) {
+          Events.events = {};
+          r.forEach(d => {
+            const event = d.data();
+            console.log(event);
+            const day = format(new Date(event.startTime.toDate()), FORMAT);
+            const e = {
+              name: event.name,
+              allDayEvent: false,
+              startTime: format(
+                new Date(event.startTime.toDate()),
+                FORMAT_TIME,
+              ),
+              endTime: format(new Date(event.endTime.toDate()), FORMAT_TIME),
+              participant: event.participant,
+              price: event.price,
+            };
+            Events.addEvent(day, e);
+          });
+        }
+      })
+      .catch(e => {
+        throw new Error(e);
+      });
+  },
+  fetchTraineeEvents(displayName) {
+    firebase
+      .firestore()
+      .collection('events')
+      .where('participant', '==', displayName)
       .get()
       .then(r => {
         if (!r.empty) {
@@ -36,6 +69,43 @@ export const Events = store({
               endTime: format(new Date(event.endTime.toDate()), FORMAT_TIME),
               participant: event.participant,
               price: event.price,
+              trainer: event.trainer,
+              description: event.description,
+              trainerAvatar: event.trainerAvatar,
+            };
+            Events.addEvent(day, e);
+          });
+        }
+      })
+      .catch(e => {
+        throw new Error(e);
+      });
+  },
+  fetchTraineeEvents(displayName) {
+    firebase
+      .firestore()
+      .collection('events')
+      .where('participant', '==', displayName)
+      .get()
+      .then(r => {
+        if (!r.empty) {
+          Events.events = {};
+          r.forEach(d => {
+            const event = d.data();
+            const day = format(new Date(event.startTime.toDate()), FORMAT);
+            const e = {
+              name: event.name,
+              allDayEvent: false,
+              startTime: format(
+                new Date(event.startTime.toDate()),
+                FORMAT_TIME,
+              ),
+              endTime: format(new Date(event.endTime.toDate()), FORMAT_TIME),
+              participant: event.participant,
+              price: event.price,
+              trainer: event.trainer,
+              description: event.description,
+              trainerAvatar: event.trainerAvatar,
             };
             Events.addEvent(day, e);
           });
