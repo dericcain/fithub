@@ -8,6 +8,7 @@ const ContainerNoPadding = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
+  background-color: #f2f2f2;
 `;
 
 export const ContainerWithHeader = ({ title, children }) => {

@@ -72,6 +72,7 @@ export const User = store({
     postalCode,
     availability,
     hasCompletedOnBoarding,
+    hours,
     serverAuthCode,
   }) {
     User.uid = uid;
@@ -83,6 +84,7 @@ export const User = store({
     User.isTrainer = isTrainer;
     User.postalCode = postalCode;
     User.availability = availability;
+    User.hours = hours;
     User.hasCompletedOnBoarding = hasCompletedOnBoarding;
     User.serverAuthCode = serverAuthCode;
   },
