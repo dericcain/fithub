@@ -37,12 +37,19 @@ const ButtonWrapper = styled.View`
   margin-top: 24px;
 `;
 
+const Logo = styled.Image`
+  width: 200px;
+  height: 100px;
+  margin-bottom: 72px;
+`;
+
 export const Login = view(({ navigation }) => {
   const googleSignin = async () => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       const { serverAuthCode } = userInfo;
+      console.log(serverAuthCode);
       const credential = firebase.auth.GoogleAuthProvider.credential(
         userInfo.idToken,
         userInfo.accessToken,
@@ -94,6 +101,7 @@ export const Login = view(({ navigation }) => {
       end={{ x: 1, y: 1 }}
       style={{ flex: 1 }}>
       <Container>
+        <Logo source={require('../../../assets/images/smalllogo.png')} />
         <Text h6 style={{ color: '#fff', maxWidth: 260, textAlign: 'center' }}>
           Bringing the personal back into personal trainer.
         </Text>
