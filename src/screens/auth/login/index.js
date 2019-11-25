@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Dimensions } from 'react-native';
+import { ImageBackground, Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { view } from 'react-easy-state';
@@ -30,7 +30,8 @@ const Container = styled.View`
   width: 100%;
   padding: 24px;
   align-items: center;
-  justify-content: center;
+  margin-top: 125px;
+
 `;
 
 const ButtonWrapper = styled.View`
@@ -125,7 +126,7 @@ export const Login = view(({ navigation }) => {
           />
         </ButtonWrapper>
       </Container>
-      <Image
+      <ImageBackground
         style={{
           width: screenWidth,
           height: screenHeight,
