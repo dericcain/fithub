@@ -9,6 +9,41 @@ import { ProfileScreen } from '../../../stores/profileScreen';
 import { ContainerWithHeader } from '../../../components/container-with-header';
 import { Availability, HoursEdit } from '../../../utils/hours-functions';
 
+const ListContainer = styled.View`
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+`;
+
+const ContentContainer = styled.View`
+  flex-direction: column;
+  flex: 1;
+  background-color: white;
+  margin: 12px;
+  padding: 12px;
+  border-radius: 6px;
+`;
+
+const HeaderContainer = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const ProfileRow = styled.View`
+  flex: 1;
+  flex-direction: row;
+`;
+
+const ContentHeader = ({ title, edit }) => {
+  return (
+    <HeaderContainer style={{ marginBottom: 12 }}>
+      <Text h4>{title}</Text>
+      <Icon onPress={edit} name="edit" style={{ alignSelf: 'flex-end' }} />
+    </HeaderContainer>
+  );
+};
+
 export const Profile = view(({ navigation }) => {
   const logout = () => {
     firebase
@@ -22,41 +57,6 @@ export const Profile = view(({ navigation }) => {
   const handleZipChange = synthEvent => {
     User.setPostalCode(synthEvent.nativeEvent.text);
     ProfileScreen.setEditInfo();
-  };
-
-  const ListContainer = styled.View`
-    flex-direction: column;
-    flex: 1;
-    width: 100%;
-  `;
-
-  const ContentContainer = styled.View`
-    flex-direction: column;
-    flex: 1;
-    background-color: white;
-    margin: 12px;
-    padding: 12px;
-    border-radius: 6px;
-  `;
-
-  const HeaderContainer = styled.View`
-    flex: 1;
-    flex-direction: row;
-    justify-content: space-between;
-  `;
-
-  const ProfileRow = styled.View`
-    flex: 1;
-    flex-direction: row;
-  `;
-
-  const ContentHeader = ({ title, edit }) => {
-    return (
-      <HeaderContainer style={{ marginBottom: 12 }}>
-        <Text h4>{title}</Text>
-        <Icon onPress={edit} name="edit" style={{ alignSelf: 'flex-end' }} />
-      </HeaderContainer>
-    );
   };
 
   return (

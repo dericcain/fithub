@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 import { colors } from '../assets/colors';
 
 const ContainerNoPadding = styled.View`
-  padding: 24px 0 0 0;
+  padding: 0;
   flex: 1;
   align-items: center;
   justify-content: center;
