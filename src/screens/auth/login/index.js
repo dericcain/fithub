@@ -31,7 +31,6 @@ const Container = styled.View`
   padding: 24px;
   align-items: center;
   margin-top: 125px;
-
 `;
 
 const ButtonWrapper = styled.View`
@@ -50,7 +49,7 @@ export const Login = view(({ navigation }) => {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       const { serverAuthCode } = userInfo;
-      console.log(serverAuthCode);
+
       const credential = firebase.auth.GoogleAuthProvider.credential(
         userInfo.idToken,
         userInfo.accessToken,
